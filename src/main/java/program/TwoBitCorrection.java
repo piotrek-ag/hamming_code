@@ -7,9 +7,8 @@ import structures.*;
 public class TwoBitCorrection {
 
 	public static int[] correctTwoBits(int[] singleEncodedCodeWord, int[] afterModuloDivision) {
-		System.out.println("Starting correctTwoBits() method...");
+		//System.out.println("Starting correctTwoBits() method...");
 		int[] b = checkWhichTwoBitsAreWrong(singleEncodedCodeWord, afterModuloDivision);
-		System.out.println("Dwa błędy na pozycjach: " + b[0] + " i " + b[1]);
 		int[] correctedCodeWord = new int[singleEncodedCodeWord.length];
 		
 		for(int i=0;i<b.length;i++) {
@@ -32,11 +31,12 @@ public class TwoBitCorrection {
 		int[][] bigMatrix = matrices.getxxx();
 		int bitNumberOne = 0;
 		int bitNumberTwo = 0;
+		boolean changed = false;
 		int horizontalMatrixDimension = bigMatrix[0].length;
-		System.out.println("horizontalMatrixDimension: " + horizontalMatrixDimension);
+		//System.out.println("horizontalMatrixDimension: " + horizontalMatrixDimension);
 		int vectLength = afterModuloDivision.length;
 		int verticalMatrixDimension = bigMatrix.length;
-		System.out.println("verticalMatrixDimension: " + verticalMatrixDimension);
+		//System.out.println("verticalMatrixDimension: " + verticalMatrixDimension);
 		if(vectLength!=verticalMatrixDimension) System.err.println("Nie można wyznaczyć błędnych bitów. Nie zgadzają się rozmiary wektora niezerowego i pionowy rozmiar macierzy.");
 		int counter = 0;
 		
@@ -61,20 +61,20 @@ public class TwoBitCorrection {
 					verticalVector2[l] = bigMatrix[l][k]; // tutaj l pełni tą samą rolę co j kilka linijek wyżej
 				}
 				counter++;
-				System.out.println("\nIlość obrotów pętli: " + counter);
+				//System.out.println("\nIlość obrotów pętli: " + counter);
 				int[] sumOfTwoVectors = sumTwoVectors(verticalVector1, verticalVector2);
 				int[] sumOfTwoVectorsModuloDividedByTwo = Encode.divideVectorModuloTwo(sumOfTwoVectors);
 				container[counter] = sumOfTwoVectorsModuloDividedByTwo;
 				if(OneBitCorrection.vectorsEqual(sumOfTwoVectorsModuloDividedByTwo, afterModuloDivision)) {
 					bitNumberOne=i;
 					bitNumberTwo=k;
+					changed = true;
 				};
 			}
-			System.out.println();
 			retValue[0] = bitNumberOne;
 			retValue[1] = bitNumberTwo;
 		}
-		System.out.println("Podwójny błąd na pozycjach: " + bitNumberOne + " i " + bitNumberTwo);
+		if(changed) System.out.println("Podwójny błąd na pozycjach: " + bitNumberOne + " i " + bitNumberTwo);
 		return retValue;
 	}
 	

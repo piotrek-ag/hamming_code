@@ -29,14 +29,18 @@ public class Decode {
 	}
 	
 	private static int[] correctErrors(int[] singleEncodedCodeWord, int[] afterModuloDivision) {
-		// korekcja pojedynczego bitu
-		int[] correctedCodeWord = new int[singleEncodedCodeWord.length]; 
-//		correctedCodeWord = OneBitCorrection.correctOneBit(singleEncodedCodeWord, afterModuloDivision);
+
+		int[] singleEncodedCodeWordCopy = new int[singleEncodedCodeWord.length];
+		singleEncodedCodeWordCopy = singleEncodedCodeWord.clone();
 		
 		// korekcja dwóch bitów
+		int[] correctedCodeWord = new int[singleEncodedCodeWord.length];
 		correctedCodeWord = TwoBitCorrection.correctTwoBits(singleEncodedCodeWord, afterModuloDivision);
-		System.out.println("The corrected codeword is: ");
-		Printers.printArray(correctedCodeWord);
+		
+		if(OneBitCorrection.vectorsEqual(correctedCodeWord, singleEncodedCodeWordCopy)) {
+			// korekcja pojedynczego bitu
+			correctedCodeWord = OneBitCorrection.correctOneBit(singleEncodedCodeWord, afterModuloDivision);			
+		}
 		return correctedCodeWord;
 	}
 

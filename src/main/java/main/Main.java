@@ -52,7 +52,7 @@ public class Main {
 				String stringEncodedArray = Conversions.binaryNumber2DArrayToString(encodedArray);
 				
 				// zapisuję zakodowaną tablicę słów do pliku, gdzie będzie można ręcznie zmienić pojedynczy bit dla zasymulowania błędu
-				FileWriters.writeStringToFile(stringEncodedArray, "binaryEncodedInputString.txt", lineLength); // niby ok.
+				FileWriters.writeStringToFile(stringEncodedArray, "binaryEncodedInputString.txt", lineLength);
 				break;
 			case(2):
 				int[][] binaryEncodedArray = FileReaders.readBinaryStringsFromFile("binaryEncodedInputString.txt");
