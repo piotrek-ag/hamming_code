@@ -11,13 +11,25 @@ public class TwoBitCorrection {
 		int[] b = checkWhichTwoBitsAreWrong(singleEncodedCodeWord, afterModuloDivision);
 		System.out.println("Dwa błędy na pozycjach: " + b[0] + " i " + b[1]);
 		int[] correctedCodeWord = new int[singleEncodedCodeWord.length];
+		
+		for(int i=0;i<b.length;i++) {
+			// koryguję błąd
+			if(singleEncodedCodeWord[b[i]]==1) {
+				correctedCodeWord = singleEncodedCodeWord; 
+				correctedCodeWord[b[i]]=0;
+			}
+			else {
+				correctedCodeWord = singleEncodedCodeWord; 
+				correctedCodeWord[b[i]]=1;
+			}
+		}
 		return correctedCodeWord;
 	}
 
 	public static int[] checkWhichTwoBitsAreWrong(int[] singleEncodedCodeWord, int[] afterModuloDivision) {
 		int[] retValue = new int[2];
 		Matrices matrices = new Matrices();
-		int[][] bigMatrix = matrices.getBigMatrix();
+		int[][] bigMatrix = matrices.getxxx();
 		int bitNumberOne = 0;
 		int bitNumberTwo = 0;
 		int horizontalMatrixDimension = bigMatrix[0].length;
@@ -30,7 +42,7 @@ public class TwoBitCorrection {
 		
 		
 
-		int[][] container = new int[67][]; //
+		int[][] container = new int[121][]; //
 		for(int i=0;i<horizontalMatrixDimension-1;i++) { // dla naszego przypadku iteruje od 0-11
 			// pierwszy pionowy wektor
 			int[] verticalVector1 = new int[verticalMatrixDimension];
@@ -49,7 +61,7 @@ public class TwoBitCorrection {
 					verticalVector2[l] = bigMatrix[l][k]; // tutaj l pełni tą samą rolę co j kilka linijek wyżej
 				}
 				counter++;
-				System.out.println("\nIlość obrotów pętli: " + counter); // do tego miejsca chyba ok
+				System.out.println("\nIlość obrotów pętli: " + counter);
 				int[] sumOfTwoVectors = sumTwoVectors(verticalVector1, verticalVector2);
 				int[] sumOfTwoVectorsModuloDividedByTwo = Encode.divideVectorModuloTwo(sumOfTwoVectors);
 				container[counter] = sumOfTwoVectorsModuloDividedByTwo;

@@ -37,7 +37,7 @@ public class Main {
 				Printers.print2DArray(binaryArray);
 
 				// zakodowana tablica ma tyle samo słów, co niezakodowana, ale długość każdego słowa wzrasta z 8 do 12 bitów
-				int[][] encodedArray = new int[binaryArray.length][16]; // nie za dobre rozwiązanie 
+				int[][] encodedArray = new int[binaryArray.length][16]; // rozwiązanie hardkodowane :(
 				int lineLength = encodedArray[0].length;
 				
 				// tutaj przemnażam przez macierz[8][8] - długość tablicy urasta do 16 bitów
@@ -62,11 +62,9 @@ public class Main {
 				int[][] correctedBinaryArray = new int[binaryEncodedArray.length][binaryEncodedArray[0].length];
 				for(int i=0;i<binaryEncodedArray.length;i++) {
 					System.out.println("Słowo " + i);
-					correctedBinaryArray[i] = Decode.decode(binaryEncodedArray[i]);	// dostawić korekcję 2 bitów				
+					correctedBinaryArray[i] = Decode.decode(binaryEncodedArray[i]);	// dostawić korekcję 2 bitów			
 				}
-				
-				Printers.print2DArray(correctedBinaryArray); // ok
-				
+								
 				// konwertuję dwuwymiarową tablicę intów na tekst
 				String decodedText = intBinaryArrayToText(correctedBinaryArray);
 				System.out.println("\nOdkodowany tekst: " + decodedText);

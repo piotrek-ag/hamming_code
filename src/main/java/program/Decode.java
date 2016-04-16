@@ -35,6 +35,8 @@ public class Decode {
 		
 		// korekcja dwóch bitów
 		correctedCodeWord = TwoBitCorrection.correctTwoBits(singleEncodedCodeWord, afterModuloDivision);
+		System.out.println("The corrected codeword is: ");
+		Printers.printArray(correctedCodeWord);
 		return correctedCodeWord;
 	}
 
